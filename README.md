@@ -6,7 +6,7 @@ Welcome to the Translation Management Service—a Laravel-based application desi
 FROM php:8.3 -apache
 ```
 
-# clone repository
+# Clone repository
 ```php
 git clone https://github.com/AqibUllah/Translations-API.git
 ```
@@ -16,24 +16,24 @@ git clone https://github.com/AqibUllah/Translations-API.git
 composer install
 ```
 
-# copy environment
+# Copy environment
 ```php
 cp .env.example .env | copy .env.example .env
 ```
-# generate key
+# Generate key
 ```php
 php artisan key:generate
 ```
 
-# make sure you have increased memory size limit because there is a lots of data for seeding
+# Note: Make sure you have increased memory size limit because there is a lots of data for seeding
 ```php
 php.ini >> memory_limit = 1024M
 ```
-# running migration + seed
+# Run migration + seed
 ```php
 php artisan migrate --seed
 ```
-# run application
+# Run application
 ```php
 php artisan serve
 ```
