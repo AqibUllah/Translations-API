@@ -1,0 +1,9 @@
+config:
+  target: "http://translations-api.test"
+  phases:
+    - duration: 60
+      arrivalRate: 50
+scenarios:
+  - flow:
+      - get:
+          url: "/api/translations/export"
