@@ -19,7 +19,7 @@ class AuthController extends Controller
             content: new OA\JsonContent(
                 required: ["email","password"],
                 properties: [
-                    new OA\Property(property: "email",type:"string",example:"user@example.com"),
+                    new OA\Property(property: "email",type:"string",default: "gia.beier@example.org"),
                     new OA\Property(property: "password",type:"string",example:"*****"),
                 ]
             )
@@ -44,7 +44,6 @@ class AuthController extends Controller
                 )
             ),
         ],
-
     )]
     public function login(Request $request): JsonResponse
     {

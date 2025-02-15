@@ -2,7 +2,11 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Translations API",
-        "version": "1.0"
+        "description": "API Documentation for Translations",
+        "contact": {
+            "email": "aqibullah3312@gmail.com"
+        },
+        "version": "1.0.0"
     },
     "paths": {
         "/api/auth/login": {
@@ -25,7 +29,7 @@
                                 "properties": {
                                     "email": {
                                         "type": "string",
-                                        "example": "user@example.com"
+                                        "default": "gia.beier@example.org"
                                     },
                                     "password": {
                                         "type": "string",
@@ -76,50 +80,515 @@
         "/api/translations": {
             "get": {
                 "tags": [
-                    "translation"
+                    "Translation"
                 ],
-                "summary": "Translations API",
+                "summary": "Get Translations",
+                "description": "Get translations",
                 "operationId": "434a55804ca50c9845bd4781c222a539",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Filter translations by search",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "key",
+                        "in": "query",
+                        "description": "Filter translations with key",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "Filter translations by locale",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "tag",
+                        "in": "query",
+                        "description": "Filter translations by tag",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "Successful response",
-                        "headers": {
-                            "Accept": {
-                                "description": "Accepted response format",
-                                "schema": {
-                                    "type": "string",
-                                    "example": "application/json"
-                                }
-                            }
-                        },
+                        "description": "Translations",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "message": {
+                                        "locale": {
                                             "type": "string",
-                                            "example": "Success"
+                                            "default": "en"
+                                        },
+                                        "group": {
+                                            "type": "string",
+                                            "example": "messages"
+                                        },
+                                        "key": {
+                                            "type": "string",
+                                            "example": "hello_world"
+                                        },
+                                        "value": {
+                                            "type": "string",
+                                            "example": "Hello World"
+                                        },
+                                        "tags": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "example": [
+                                                "mobile",
+                                                "desktop"
+                                            ]
                                         }
                                     },
                                     "type": "object"
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "Translations not found"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Translation"
+                ],
+                "summary": "Add Translation",
+                "description": "Add a new translation",
+                "operationId": "fe38d8cf02ff5c92d2cd8d5dfb095e5f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "locale",
+                                    "group",
+                                    "key",
+                                    "value",
+                                    "tags"
+                                ],
+                                "properties": {
+                                    "locale": {
+                                        "type": "string",
+                                        "default": "en"
+                                    },
+                                    "group": {
+                                        "type": "string",
+                                        "example": "messages"
+                                    },
+                                    "key": {
+                                        "type": "string",
+                                        "example": "hello_world"
+                                    },
+                                    "value": {
+                                        "type": "string",
+                                        "example": "Hello World"
+                                    },
+                                    "tags": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "example": [
+                                            "mobile",
+                                            "desktop"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful login",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "locale": {
+                                            "type": "string",
+                                            "default": "en"
+                                        },
+                                        "group": {
+                                            "type": "string",
+                                            "example": "messages"
+                                        },
+                                        "key": {
+                                            "type": "string",
+                                            "example": "hello_world"
+                                        },
+                                        "value": {
+                                            "type": "string",
+                                            "example": "Hello World"
+                                        },
+                                        "tags": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "example": [
+                                                "mobile",
+                                                "desktop"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/translations/{translation_id}": {
+            "get": {
+                "tags": [
+                    "Translation"
+                ],
+                "summary": "Add Translation",
+                "description": "Add a new translation",
+                "operationId": "a519a680692d9141afecdb622b23ca3b",
+                "parameters": [
+                    {
+                        "name": "translation_id",
+                        "in": "path",
+                        "description": "Translation ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Translation Details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "locale": {
+                                            "type": "string",
+                                            "default": "en"
+                                        },
+                                        "group": {
+                                            "type": "string",
+                                            "example": "messages"
+                                        },
+                                        "key": {
+                                            "type": "string",
+                                            "example": "hello_world"
+                                        },
+                                        "value": {
+                                            "type": "string",
+                                            "example": "Hello World"
+                                        },
+                                        "tags": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "example": [
+                                                "mobile",
+                                                "desktop"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Translation not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Translation"
+                ],
+                "summary": "Add Translation",
+                "description": "Update translation",
+                "operationId": "3dadd1591f5d4ecb5d25cf33de19ff47",
+                "parameters": [
+                    {
+                        "name": "translation_id",
+                        "in": "path",
+                        "description": "Translation ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "locale",
+                                    "group",
+                                    "key",
+                                    "value",
+                                    "tags"
+                                ],
+                                "properties": {
+                                    "locale": {
+                                        "type": "string",
+                                        "default": "en"
+                                    },
+                                    "group": {
+                                        "type": "string",
+                                        "example": "messages"
+                                    },
+                                    "key": {
+                                        "type": "string",
+                                        "example": "hello_world"
+                                    },
+                                    "value": {
+                                        "type": "string",
+                                        "example": "Hello World"
+                                    },
+                                    "tags": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "example": [
+                                            "mobile",
+                                            "desktop"
+                                        ]
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Translation Details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "locale": {
+                                            "type": "string",
+                                            "default": "en"
+                                        },
+                                        "group": {
+                                            "type": "string",
+                                            "example": "messages"
+                                        },
+                                        "key": {
+                                            "type": "string",
+                                            "example": "hello_world"
+                                        },
+                                        "value": {
+                                            "type": "string",
+                                            "example": "Hello World"
+                                        },
+                                        "tags": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "example": [
+                                                "mobile",
+                                                "desktop"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Translation not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Translation"
+                ],
+                "summary": "Delete Translation",
+                "description": "Delete a translation",
+                "operationId": "adff2bf68facd58a3425bdb761971819",
+                "parameters": [
+                    {
+                        "name": "translation_id",
+                        "in": "path",
+                        "description": "Translation ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Translation Deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Translation not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/translations/export": {
+            "get": {
+                "tags": [
+                    "Translation"
+                ],
+                "summary": "Export Translations",
+                "description": "Add a new translation",
+                "operationId": "52e76cf9a0dbfcb42b1d151b49f2b09b",
+                "parameters": [
+                    {
+                        "name": "locale",
+                        "in": "query",
+                        "description": "Locale",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Translations",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "locale": {
+                                            "type": "string",
+                                            "default": "en"
+                                        },
+                                        "group": {
+                                            "type": "string",
+                                            "example": "messages"
+                                        },
+                                        "key": {
+                                            "type": "string",
+                                            "example": "hello_world"
+                                        },
+                                        "value": {
+                                            "type": "string",
+                                            "example": "Hello World"
+                                        },
+                                        "tags": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "example": [
+                                                "mobile",
+                                                "desktop"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "No translations found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         }
     },
     "components": {
-        "responses": {
-            "200": {
-                "description": "success"
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "bearerFormat": "sanctum",
+                "scheme": "bearer"
             },
-            "201": {
-                "description": "success 2"
-            },
-            "401": {
-                "description": "Unauthorised"
+            "sanctum": {
+                "type": "bearer",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
             }
         }
     },
@@ -129,8 +598,13 @@
             "description": "Authentication"
         },
         {
-            "name": "translation",
-            "description": "translation"
+            "name": "Translation",
+            "description": "Translation"
+        }
+    ],
+    "security": [
+        {
+            "sanctum": []
         }
     ]
 }
