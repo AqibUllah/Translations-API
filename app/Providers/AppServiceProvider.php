@@ -27,6 +27,8 @@ class AppServiceProvider extends ServiceProvider
                 return new CacheTranslationRepository($app->make(EloquentTranslationRepository::class), 500);
             }
         );
+        $this->app->register(\L5Swagger\L5SwaggerServiceProvider::class);
+
     }
 
     /**

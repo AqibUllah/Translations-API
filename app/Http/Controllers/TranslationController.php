@@ -7,6 +7,9 @@ use App\Models\Translation;
 use App\Services\TranslationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use OpenApi\Attributes as OA;
+
+#[OA\Info(title: "Translations API", version: "1.0")]
 
 class TranslationController extends Controller
 {
@@ -18,8 +21,28 @@ class TranslationController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/api/translations",
+     *     summary="Translations API",
+     *     tags={"translation"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful response",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Success")
+     *         ),
+     *         @OA\Header(
+     *             header="Accept",
+     *             description="Accepted response format",
+     *             @OA\Schema(type="string", example="application/json")
+     *         )
+     *     )
+     * )
      */
+    #[OA\Response(response: '200', description: 'success')]
+    #[OA\Response(response: '201', description: 'success 2')]
+    #[OA\Response(response: '401', description: 'Unauthorised')]
+
     public function index(Request $request): JsonResponse
     {
         $filters = $request->only(['locale', 'key', 'tag', 'search']);
