@@ -37,3 +37,11 @@ php artisan migrate --seed
 ```php
 php artisan serve
 ```
+# API Endpoints
+```php
+GET     api/translations
+POST    api/translations
+PUT     api/translations/translation_id
+DELETE  api/translations/translation_id
+GET     api/translations/export
+```
