@@ -41,7 +41,7 @@ php artisan serve
 ```
 # API Endpoints
 ```php
-GET     api/translations   query params = search,key,tag,locale
+GET     api/translations   query params = search,key,tag,locale,perPage
 POST    api/translations
 PUT     api/translations/translation_id
 DELETE  api/translations/translation_id
