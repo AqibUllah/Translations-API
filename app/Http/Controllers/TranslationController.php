@@ -300,8 +300,12 @@ class TranslationController extends Controller
     )]
     public function destroy($translation_id): JsonResponse
     {
-        $this->translationService->deleteTranslation($translation_id);
-        return response()->json(null, 204);
+        try {
+            $this->translationService->deleteTranslation($translation_id);
+            return response()->json(null, 204);
+        }catch (\Exception $e){
+            return response()->json($e->getMessage(),500);
+        }
     }
 
     #[OA\Get(

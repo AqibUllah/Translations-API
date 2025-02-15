@@ -33,7 +33,7 @@
                                     },
                                     "password": {
                                         "type": "string",
-                                        "example": "*****"
+                                        "example": "password"
                                     }
                                 },
                                 "type": "object"
