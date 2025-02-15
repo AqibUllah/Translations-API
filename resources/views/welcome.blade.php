@@ -84,7 +84,7 @@
     <h1>Translations API</h1>
     <p>
         Welcome to the <strong>Translations API</strong> – your ultimate solution for seamless language translation.
-        Our API empowers developers to integrate real-time translation capabilities into their applications with ease.
+        Our API empowers developers to integrate translation capabilities into their applications with ease.
         Whether you're building a global app or need multilingual support, our API is here to simplify your workflow.
     </p>
     <button class="cta-button" onclick="window.location.href='/api/documentation'">Get Started</button>
