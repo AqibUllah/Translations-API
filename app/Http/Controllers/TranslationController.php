@@ -39,16 +39,14 @@ class TranslationController extends Controller
      *     )
      * )
      */
-    #[OA\Response(response: '200', description: 'success')]
-    #[OA\Response(response: '201', description: 'success 2')]
+    #[OA\Response(response: '201', description: 'success')]
     #[OA\Response(response: '401', description: 'Unauthorised')]
-
     public function index(Request $request): JsonResponse
     {
         $filters = $request->only(['locale', 'key', 'tag', 'search']);
         $translations = $this->translationService->listTranslations($filters,$request->perPage ?? 50);
 
-        return response()->json(TranslationResource::collection($translations));
+        return response()->json(TranslationResource::collection($translations),201);
     }
 
     /**
