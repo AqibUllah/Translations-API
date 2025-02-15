@@ -121,6 +121,15 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "perPage",
+                        "in": "query",
+                        "description": "Translations items per page",
+                        "required": false,
+                        "schema": {
+                            "type": "number"
+                        }
                     }
                 ],
                 "responses": {

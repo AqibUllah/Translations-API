@@ -7,6 +7,7 @@ use App\Models\Translation;
 use App\Services\TranslationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use OpenApi\Attributes as OA;
 
 //#[OA\Info(title: "Translations API", version: "1.0")]
@@ -71,6 +72,13 @@ class TranslationController extends Controller
                 required: false,
                 description: "Filter translations by tag",
                 schema: new OA\Schema(type: "string")
+            ),
+            new OA\Parameter(
+                name: "perPage",
+                in: "query",
+                required: false,
+                description: "Translations items per page",
+                schema: new OA\Schema(type: "number")
             )
         ],
         responses: [
@@ -145,7 +153,13 @@ class TranslationController extends Controller
         $data = $request->validate([
             'locale'    => 'required|string|max:5',
             'group'     => 'required|string',
-            'key'       => 'required|string',
+            'key'       => [
+                'required',
+                'string',
+                Rule::unique('translations')->where(function ($query) use ($request) {
+                    return $query->where('group', $request->group);
+                }),
+            ],
             'value'     => 'required|string',
             'tags'      => 'array',
         ]);
