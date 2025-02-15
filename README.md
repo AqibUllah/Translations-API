@@ -46,4 +46,4 @@ DELETE  api/translations/translation_id
 GET     api/translations/export
 ```
 
-![Demo Image](/demo.png)
+![Demo Image](https://raw.githubusercontent.com/AqibUllah/Translations-API/main/demo.png)
