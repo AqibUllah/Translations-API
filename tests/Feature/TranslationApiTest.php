@@ -33,7 +33,7 @@ class TranslationApiTest extends TestCase
 
         $response = $this->actingAs($user)->getJson('/api/translations?locale=en');
 
-        $response->assertStatus(200)
+        $response->assertStatus(201)
             ->assertJsonFragment(['key' => 'hello_world'])
             ->assertJsonMissing(['key' => 'bonjour_monde']);
     }
