@@ -2,6 +2,7 @@
 Welcome to the Translation Management Service—a Laravel-based application designed to store, manage, and serve translations for multiple locales. The service focuses on clean architecture, performance, and scalability, leveraging SOLID principles and repository/service patterns. By integrating caching, API resources, and advanced testing, it ensures both robust functionality and a maintainable codebase.
 
 ![Demo Image](https://translations.lodhiui.com/demo.png)
+### See [Live Demo](https://translations.lodhiui.com)
 
 # Use official PHP + Apache base
 ```php
